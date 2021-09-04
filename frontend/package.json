@@ -20,6 +20,7 @@
     "react-native-elements": "^3.4.2",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-paper": "^4.9.2",
+    "react-native-swipe-list-view": "^3.2.9",
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {

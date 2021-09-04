@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View , FlatList} from 'react-native'
 import { ListItem, Button } from 'react-native-elements'
 
-const HomeScreen = () => {
+
+const HomeScreen = ({ navigation }) => {
     // const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([])
     // console.log(data);
@@ -29,37 +30,68 @@ const HomeScreen = () => {
 
     if (!data) return null;
 
+    const enterDetail = (title, description) => {
+        navigation.navigate("Detail", {
+            title,
+            description
+        })
+    }
+
 
     const renderData = (item) => {
         return (
-            <ListItem.Swipeable 
-                bottomDivider
+            <ListItem.Swipeable
                 leftContent={
                     <Button
-                      title="Complete"
-                      icon={{ name: 'done', color: 'white' }}
-                      buttonStyle={{ height: '100%' }}
-                      onPress={complete_task}
-
+                    title="Info"
+                    icon={{ name: 'info', color: 'white' }}
+                    buttonStyle={{ minHeight: '100%' }}
+                    enterDetail={enterDetail}
+                    
                     />
-                  }
-                  rightContent={
+                }
+                rightContent={
                     <Button
-                      title="Delete"
-                      icon={{ name: 'delete', color: 'white' }}
-                      buttonStyle={{ height: '100%', backgroundColor: 'red' }}
-                      onPress={delete_task}
-
+                    title="Delete"
+                    icon={{ name: 'delete', color: 'white' }}
+                    buttonStyle={{ minHeight: '100%', backgroundColor: 'red' }}
                     />
-                  }
-            >
+                }
+                >
                 <ListItem.Content>
                     <ListItem.Title>{ item.title }</ListItem.Title>
-                    <ListItem.Subtitle>{ item.description } </ListItem.Subtitle>
-                    <ListItem.CheckBox checked={(item.completed) ? true : false}>{ item.completed }</ListItem.CheckBox>
                 </ListItem.Content>
                 <ListItem.Chevron />
             </ListItem.Swipeable>
+
+            // <ListItem.Swipeable 
+            //     bottomDivider
+            //     leftContent={
+            //         <Button
+            //           title="Complete"
+            //           icon={{ name: 'done', color: 'white' }}
+            //           buttonStyle={{ minHeight: '100%' }}
+            //           onPress={complete_task}
+
+            //         />
+            //       }
+            //       rightContent={
+            //         <Button
+            //           title="Delete"
+            //           icon={{ name: 'delete', color: 'white' }}
+            //           buttonStyle={{ height: '100%', backgroundColor: 'red' }}
+            //           onPress={delete_task}
+
+            //         />
+            //       }
+            // >
+            //     <ListItem.Content>
+            //         <ListItem.Title>{ item.title }</ListItem.Title>
+            //         <ListItem.Subtitle>{ item.description } </ListItem.Subtitle>
+            //         <ListItem.CheckBox checked={(item.completed) ? true : false}>{ item.completed }</ListItem.CheckBox>
+            //     </ListItem.Content>
+            //     <ListItem.Chevron />
+            // </ListItem.Swipeable>
         )
     }
 
