@@ -2,9 +2,14 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
 const DetailScreen = ({ navigation }) => {
+
+
+
     return (
         <View>
-            <Text></Text>
+            <Text>
+                Detail PAge
+            </Text>
         </View>
     )
 }

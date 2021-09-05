@@ -20,7 +20,11 @@ const HomeScreen = ({ navigation }) => {
     useEffect(() => {
         axios
         .get("http://127.0.0.1:8000/api/todos/")
-        .then((response) => setData(response.data))
+        // .then((response) => setData(response.data))
+        .then(response => {
+            console.log(response.data)
+            setData(response.data)
+        })
         .catch((error) => {
             console.log('[ERROR] -  Error while fetching todo data');
             console.log(error);
@@ -30,12 +34,11 @@ const HomeScreen = ({ navigation }) => {
 
     if (!data) return null;
 
-    const enterDetail = (title, description) => {
+    const enterDetail = (item => {
         navigation.navigate("Detail", {
-            title,
-            description
+            item
         })
-    }
+    })
 
 
     const renderData = (item) => {
@@ -43,11 +46,10 @@ const HomeScreen = ({ navigation }) => {
             <ListItem.Swipeable
                 leftContent={
                     <Button
-                    title="Info"
+                    title="Details"
                     icon={{ name: 'info', color: 'white' }}
                     buttonStyle={{ minHeight: '100%' }}
-                    enterDetail={enterDetail}
-                    
+                    onPress={() => enterDetail()}
                     />
                 }
                 rightContent={
@@ -63,35 +65,6 @@ const HomeScreen = ({ navigation }) => {
                 </ListItem.Content>
                 <ListItem.Chevron />
             </ListItem.Swipeable>
-
-            // <ListItem.Swipeable 
-            //     bottomDivider
-            //     leftContent={
-            //         <Button
-            //           title="Complete"
-            //           icon={{ name: 'done', color: 'white' }}
-            //           buttonStyle={{ minHeight: '100%' }}
-            //           onPress={complete_task}
-
-            //         />
-            //       }
-            //       rightContent={
-            //         <Button
-            //           title="Delete"
-            //           icon={{ name: 'delete', color: 'white' }}
-            //           buttonStyle={{ height: '100%', backgroundColor: 'red' }}
-            //           onPress={delete_task}
-
-            //         />
-            //       }
-            // >
-            //     <ListItem.Content>
-            //         <ListItem.Title>{ item.title }</ListItem.Title>
-            //         <ListItem.Subtitle>{ item.description } </ListItem.Subtitle>
-            //         <ListItem.CheckBox checked={(item.completed) ? true : false}>{ item.completed }</ListItem.CheckBox>
-            //     </ListItem.Content>
-            //     <ListItem.Chevron />
-            // </ListItem.Swipeable>
         )
     }
 
